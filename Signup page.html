@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AIFlow Studio - Signup</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+    <script>
+        async function submitForm(e) {
+            e.preventDefault();
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            const username = document.getElementById('username').value;
+
+            if(email && password && username) {
+                const response = await fetch("https://script.google.com/macros/s/AKfycbyqwfhP9zP1A75PmnyW8F05x-AGObVncWfLZ8erNZ4j32NvMgUneRzipvngBRv4CWap/exec", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+                    body: new URLSearchParams({
+                        "Email": email,
+                        "Password": password,
+                        "Username": username
+                    })
+                });
+
+                const result = await response.text();
+
+                if(result === "Success") {
+                    alert("Signup Successful ✅");
+                    document.getElementById("signupForm").reset();
+                } else {
+                    alert("Signup Failed ❌");
+                }
+            } else {
+                alert("Please Fill All Fields!");
+            }
+        }
+    </script>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+        }
+        body {
+            background: linear-gradient(135deg, #6C63FF, #4A47A3);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            text-align: center;
+            padding: 20px;
+            animation: fadeIn 1.5s ease-in-out;
+        }
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        .container {
+            background: white;
+            padding: 50px;
+            border-radius: 20px;
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+            max-width: 500px;
+            width: 100%;
+            text-align: center;
+        }
+        h1 {
+            color: #6C63FF;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+        input {
+            width: 100%;
+            padding: 15px;
+            margin-bottom: 20px;
+            border: none;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+        button {
+            padding: 15px 30px;
+            background: #6C63FF;
+            color: white;
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-weight: 600;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Signup for AIFlow Studio 🚀</h1>
+    <form id="signupForm" onsubmit="submitForm(event)">
+        <input type="email" id="email" placeholder="Your Email" required>
+        <input type="password" id="password" placeholder="Create Password" required>
+        <input type="text" id="username" placeholder="Choose Username" required>
+        <button type="submit">Start Free Plan</button>
+    </form>
+</div>
+
+</body>
+</html>
